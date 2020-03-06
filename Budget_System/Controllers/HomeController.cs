@@ -17,7 +17,7 @@ namespace Budget_System.Controllers
         public ActionResult Index()
         {
             //List<Budget_t> gamers = new GetBudgetModel().getList();
-            Session["account"] = "0004";
+            //Session["account"] = "0004";
             // 依照部門顯示(資訊部、財務部顯示全部)            
             List<Budget_Step> gamers = db.Bugda_select(Session["account"].ToString()).ToList();
 
