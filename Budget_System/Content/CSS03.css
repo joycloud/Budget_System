@@ -1,0 +1,8 @@
+﻿
+@media only screen and (max-width: 720px){
+    .account {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+    }
+}

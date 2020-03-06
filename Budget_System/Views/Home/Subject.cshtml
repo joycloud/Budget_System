@@ -1,0 +1,80 @@
+﻿@model Budget_System.Models.Budget_Bugda
+@{
+    ViewBag.Title = "Subject";
+    var table = ViewBag.h;    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Subject</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[data-fancybox]").fancybox({
+            afterClose: function () {
+                history.go(0);
+            }
+        });
+    });
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Dept</th>
+                <th scope="col">Month</th>
+                <th scope="col">Bugda</th>
+                <th scope="col">Bugna</th>
+                <th scope="col">Total(Item)</th>
+                <th scope="col" style="display:none">Puid</th>
+                <th scope="col" style="display:none">Uid</th>
+                <th scope="col">Item</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in table)
+            {
+                <tr>
+                    <td>
+                        @item.Dept
+                    </td>
+                    <td>
+                        @item.Month
+                    </td>
+                    <td>
+                        @item.Bugda
+                    </td>
+                    <td>
+                        @item.Bugna
+                    </td>
+                    <td align="left">
+                        @item.Total
+                    </td>
+                    <td style="display:none">
+                        @item.Puid
+                    </td>
+                    <td style="display:none">
+                        @item.Uid
+                    </td>
+                    <td>
+                        <a href="~/Home/Items?Puid=@item.Uid&Bugda=@item.Bugda"
+                               data-fancybox data-options='{"type" : "iframe", "iframe" : {"preload" : false,
+                                                            "css" : {"width" : "800","height" : "500"}}}'>
+                                Item
+                            </a>
+                        @*<a class="btn btn-info" data-fancybox data-type="iframe" data-src="/Home/Items?Puid=@item.Uid&Bugda=@item.Bugda" href="javascript:;">Register</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-success"  />
+        </div>
+    </div>*@

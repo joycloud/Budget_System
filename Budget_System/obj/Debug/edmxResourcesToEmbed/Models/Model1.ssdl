@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Budget_Bugda">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Bugda" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Puid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Uid" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Budget_Items">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Items" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Puid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Uid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="cruser" Type="varchar" MaxLength="10" />
+    <Property Name="crdate" Type="datetime" />
+    <Property Name="eduser" Type="varchar" MaxLength="10" />
+    <Property Name="eddate" Type="datetime" />
+    <Property Name="sctrl" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Budget_t">
+    <Key>
+      <PropertyRef Name="Bno" />
+    </Key>
+    <Property Name="Bno" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Month" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="Total" Type="int" />
+    <Property Name="Uid" Type="uniqueidentifier" />
+    <Property Name="Dept" Type="nvarchar" MaxLength="10" />
+    <Property Name="Sctrl" Type="nvarchar" MaxLength="1" />
+    <Property Name="Lev" Type="int" />
+  </EntityType>
+  <EntityType Name="Bugda">
+    <Key>
+      <PropertyRef Name="Bugda" />
+    </Key>
+    <Property Name="Bugda" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="Bugna" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sctrl" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Comm_Account">
+    <Key>
+      <PropertyRef Name="SN" />
+    </Key>
+    <Property Name="SN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Permission" Type="int" />
+  </EntityType>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptNo" />
+    </Key>
+    <Property Name="DeptNo" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="sctrl" Type="nvarchar" MaxLength="1" />
+    <Property Name="GPdept" Type="int" />
+    <Property Name="Supervisor" Type="varchar" MaxLength="4" />
+    <Property Name="Agent" Type="varchar" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="Lev_Step">
+    <Key>
+      <PropertyRef Name="Bno" />
+      <PropertyRef Name="system" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="lev" />
+    </Key>
+    <Property Name="Bno" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="system" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lev" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="sign" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="sctrl" Type="varchar" MaxLength="1" />
+    <Property Name="cruser" Type="varchar" MaxLength="10" />
+    <Property Name="crdate" Type="datetime" />
+    <Property Name="eduser" Type="varchar" MaxLength="10" />
+    <Property Name="eddate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Penno" />
+    </Key>
+    <Property Name="Penno" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Deptno" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="Pname" Type="nvarchar" MaxLength="15" />
+    <Property Name="password" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Process">
+    <Key>
+      <PropertyRef Name="system" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="lev" />
+    </Key>
+    <Property Name="system" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lev" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="sign" Type="varchar" MaxLength="5" />
+    <Property Name="sctrl" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Tuser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="account" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="village" Type="varchar" MaxLength="50" />
+    <Property Name="address" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="Bugda_select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Penno" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Step_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Bno" Type="varchar" Mode="In" />
+    <Parameter Name="system" Type="varchar" Mode="In" />
+    <Parameter Name="type" Type="varchar" Mode="In" />
+    <Parameter Name="cruser" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Step_Signoff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Penno" Type="varchar" Mode="In" />
+    <Parameter Name="Bno" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Puid" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="MISModelStoreContainer">
+    <EntitySet Name="Budget_Bugda" EntityType="Self.Budget_Bugda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Budget_Items" EntityType="Self.Budget_Items" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Budget_t" EntityType="Self.Budget_t" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bugda" EntityType="Self.Bugda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comm_Account" EntityType="Self.Comm_Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lev_Step" EntityType="Self.Lev_Step" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Process" EntityType="Self.Process" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tuser" EntityType="Self.Tuser" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

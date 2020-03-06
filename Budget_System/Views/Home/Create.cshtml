@@ -1,0 +1,78 @@
+﻿@model Budget_System.Models.Budget_t
+
+@{
+    ViewBag.Title = "Create Budget";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var table = ViewBag.h;
+    var table1 = ViewBag.n;
+    var date = DateTime.Now.ToString("mmss");
+}
+
+<head>
+    <title>
+        ViewBag.Title
+    </title>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+@*<script type="text/javascript">
+   
+    function checkName(ss)
+    {
+        alert(ss);
+        confirm("Are you sure to create " + ss + "?");
+    }
+
+    </script>*@
+
+<p></p>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="col-md-10">
+                <h4>Comm_Account</h4>
+            </div>
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Dept, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Dept, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Dept, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Month, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Create" class="btn btn-outline-success" onclick="checkName(this.form)" />
+                </div>
+            </div>
+        </div>
+
+    }
+</body>
+
+<p></p>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

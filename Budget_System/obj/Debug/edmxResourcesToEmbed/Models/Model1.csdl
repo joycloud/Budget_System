@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Budget_Bugda">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Bugda" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="Puid" Type="Guid" Nullable="false" />
+    <Property Name="Uid" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comm_Account">
+    <Key>
+      <PropertyRef Name="SN" />
+    </Key>
+    <Property Name="SN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Permission" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptNo" />
+    </Key>
+    <Property Name="DeptNo" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="GPdept" Type="Int32" />
+    <Property Name="Supervisor" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Agent" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Process">
+    <Key>
+      <PropertyRef Name="system" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="lev" />
+    </Key>
+    <Property Name="system" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lev" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="sign" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Tuser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="account" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="village" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="MISEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Budget_Bugda" EntityType="Self.Budget_Bugda" />
+    <EntitySet Name="Comm_Account" EntityType="Self.Comm_Account" />
+    <EntitySet Name="Dept" EntityType="Self.Dept" />
+    <EntitySet Name="Process" EntityType="Self.Process" />
+    <EntitySet Name="Tuser" EntityType="Self.Tuser" />
+    <FunctionImport Name="Step_Insert">
+      <Parameter Name="Bno" Mode="In" Type="String" />
+      <Parameter Name="system" Mode="In" Type="String" />
+      <Parameter Name="type" Mode="In" Type="String" />
+      <Parameter Name="cruser" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Bugda" EntityType="MISModel.Bugda" />
+    <EntitySet Name="Budget_Items" EntityType="MISModel.Budget_Items" />
+    <FunctionImport Name="UpdateTotal">
+      <Parameter Name="Puid" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Person" EntityType="MISModel.Person" />
+    <FunctionImport Name="Bugda_select" ReturnType="Collection(MISModel.Budget_Step)">
+      <Parameter Name="Penno" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Step_Signoff">
+      <Parameter Name="Penno" Mode="In" Type="String" />
+      <Parameter Name="Bno" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Budget_t" EntityType="MISModel.Budget_t" />
+    <EntitySet Name="Lev_Step" EntityType="MISModel.Lev_Step" />
+  </EntityContainer>
+  <EntityType Name="Bugda">
+    <Key>
+      <PropertyRef Name="Bugda1" />
+    </Key>
+    <Property Name="Bugda1" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Bugna" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Budget_Items">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Items" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="Puid" Type="Guid" Nullable="false" />
+    <Property Name="Uid" Type="Guid" Nullable="false" />
+    <Property Name="cruser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="crdate" Type="DateTime" Precision="3" />
+    <Property Name="eduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="eddate" Type="DateTime" Precision="3" />
+    <Property Name="sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Penno" />
+    </Key>
+    <Property Name="Penno" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Deptno" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Pname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="Bugda_select_Result">
+    <Property Type="String" Name="Bno" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Month" Nullable="false" MaxLength="6" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+    <Property Type="Guid" Name="Uid" Nullable="true" />
+    <Property Type="String" Name="Dept" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Sctrl" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="Lev" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Budget_Step">
+    <Property Type="String" Name="Bno" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Month" Nullable="false" MaxLength="6" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+    <Property Type="String" Name="Dept" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Sctrl" Nullable="true" MaxLength="1" />
+    <Property Type="Guid" Name="Uid" Nullable="true" />
+    <Property Type="Decimal" Name="Lev" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Budget_t">
+    <Key>
+      <PropertyRef Name="Bno" />
+    </Key>
+    <Property Name="Bno" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Month" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="Uid" Type="Guid" />
+    <Property Name="Dept" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Lev" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Lev_Step">
+    <Key>
+      <PropertyRef Name="Bno" />
+      <PropertyRef Name="system" />
+      <PropertyRef Name="type" />
+      <PropertyRef Name="lev" />
+    </Key>
+    <Property Name="Bno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="system" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lev" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="sign" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="sctrl" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="cruser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="crdate" Type="DateTime" Precision="3" />
+    <Property Name="eduser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="eddate" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

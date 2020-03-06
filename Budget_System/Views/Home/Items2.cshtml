@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+    var table = ViewBag.h;
+    var Bugda = ViewBag.Bugda;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Items2</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body>
+    <div class="A1">
+        <table id="tblCustomers" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Bugda</th>
+                    <th scope="col">Items</th>
+                    <th scope="col">Remark</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col" style="display:none">Puid</th>
+                    <th scope="col" style="display:none">Uid</th>
+                    <th scope="col" style="display:none"></th>
+                </tr>
+            </thead>
+            <tbody id="tbTeams" >
+                @foreach (var item in table)
+                {
+                    <tr>
+                        <td>@Bugda</td>
+                        <td>@item.Items</td>
+                        <td>@item.Remark</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Price</td>
+                        <td>@item.Total</td>
+                        <td style="display:none">@item.Puid</td>
+                        <td style="display:none">@item.Uid</td>
+                        <td style="display:none">@item.sctrl</td>
+                    </tr>
+                }
+            </tbody>           
+        </table>
+    </div>
+</body>
+</html>

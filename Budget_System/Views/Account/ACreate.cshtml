@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "ACreate";
+    var DeptList = ViewBag.Dept;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<p></p>
+<h2>Create</h2>
+
+<script>
+    //$("#Dept").change(function () {
+    //    var value = $("#Dept").val();
+    //    console.log(value);
+    //    $.ajax({
+    //        type: "Post",
+    //        url: "../Home/Village?id=" + value,
+    //        data: '{}',
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        async: false,
+    //        success: function (data) {
+    //            $("#village").empty();
+    //            if (data == "") {
+    //                $("#village").append("<option value=''>請選擇縣市</option>");
+    //            }
+    //            else {
+    //                var jo = JSON.parse(data);
+    //                $("#village").append("<option value=''>請選擇</option>");
+    //                for (i = 0; i < jo.length; i++) {
+    //                    $("#village").append("<option value='" + jo[i].VillageId + "'>" + jo[i].VillageName + "</option>");
+    //                }
+    //            }
+    //        },
+    //        failure: function (errMsg) {
+    //            $("#village").empty();
+    //            $("#village").append("<option value=''>請選擇縣市</option>");
+    //        }
+    //    })
+    //});
+</script>
+<style>
+    label {
+        color: rgb(69, 99, 199);
+    }
+
+    .Password {
+        color: rgb(236, 61, 61);
+    }
+</style>
+<form style="margin-left:10px;" method="post" action="">
+    <h1>請輸入使用者資料</h1>
+    @*<div>
+            <span style="color:red">@ViewBag.Msg</span>
+        </div>*@
+
+    <div class="form-group">
+        <label for="DeptNo">部門代號</label>
+        <select id="Deptno" name="Deptno">            
+            @for (int i = 0; i < DeptList.Count; i++)
+            {
+            <option value="@DeptList[i].DeptNo">@DeptList[i].DeptNo  @DeptList[i].Name</option>
+            }
+        </select>
+    </div>
+
+    @*<div class="form-group">
+        <label for="exampleInputDeptno">部門(代號)</label>
+        <input type="text" class="form-control" id="Penno" name="Penno" placeholder="輸入部門代號" value="@Model.Deptno">
+    </div>*@
+    <div class="form-group">
+        <label for="exampleInputPenno">帳號(工號)</label>
+        <input type="text" class="form-control" id="Penno" name="Penno" placeholder="輸入帳號" value="@Model.Penno">
+        <small id="emailHelp" class="form-text text-muted">請輸入英數字</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPname">姓名</label>
+        <input type="text" class="form-control" id="Pname" name="Pname" placeholder="輸入姓名" value="@Model.Pname">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="Password">新的密碼</label>
+        <input type="password" class="form-control" id="Password1" name="password1" placeholder="輸入密碼" value="">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword2" class="Password">再次確認</label>
+        <input type="password" class="form-control" id="Password2" name="password2" placeholder="輸入密碼" value="">
+    </div>
+    <button type="submit" class="btn btn-outline-primary">確定</button>
+    <button type="reset" class="btn btn-outline-danger">清除</button>
+</form>
+

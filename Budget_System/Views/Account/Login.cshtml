@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p></p>
+<h2>Login</h2>
+
+<script>
+    function register() {
+        location.href = "/Account/ACreate";
+    }
+</script>
+
+<style>
+  label {
+  color: rgb(236, 61, 61);
+}
+</style>
+
+<form style="margin-left:5px;" method="post" action="">
+    <h1>請輸入帳號及密碼</h1>
+    <div>
+        <span style="        color: red
+">@ViewBag.Msg</span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">帳號(工號)</label>
+        <input type="text" class="form-control" id="Account" name="account" placeholder="輸入帳號" value="">
+        @*<small id="emailHelp" style="color:#CC0000">請輸入英數字</small>*@
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">密碼</label>
+        <input type="password" class="form-control" id="Password1" name="password" placeholder="輸入密碼" value="">
+    </div>
+    <button type="submit" class="btn btn-outline-success">登入</button>
+    <button type="button" class="btn btn-outline-info" onclick="register()">註冊</button>
+</form>
+

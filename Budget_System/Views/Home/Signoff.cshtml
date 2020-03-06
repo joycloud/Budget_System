@@ -1,0 +1,102 @@
+﻿
+@{
+    Layout = null;
+
+    string SCTRL = ViewBag.h;
+    var table = ViewBag.t;
+    var LEV = ViewBag.LEV;
+    var 單號 = ViewBag.單號;
+    var isPost = ViewBag.isPost;
+}
+
+<!DOCTYPE html>
+@*<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>*@
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Signoff</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("button").click(function () {
+            if ("@SCTRL" == "N") {
+                alert("你不是此關的簽核人!!");
+                return false;
+             }
+            else {
+                if (@LEV == 1.00 && $(this).val() == '退回') {
+                     alert("第一關不能退回!!");
+                    return false;
+                }
+                var aa = confirm("是否確定" + $(this).val() + "?");
+                if (aa == true) {
+                      $("input").val("@單號" + $(this).val() + ';' + @LEV);
+                }
+                else
+                    return false;
+             }
+        });
+    });
+
+    $(document).ready(function () {
+        $("table tr").find('td').each(function () {
+            $("table tr").find('td').each(function () {
+                  if($(this).html()==@LEV){
+                $(this).css("background","#D3D3D3");
+            }
+            });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="A1">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">單號</th>
+                    <th scope="col">LEV</th>
+                    <th scope="col">簽核人</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in table)
+                {
+                    <tr>
+                        <td id="單號">
+                            @item.單號
+                        </td>
+                        <td align="left">
+                            @item.LEV
+                        </td>
+                        <td align="left">
+                            @item.簽核人
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <form style="margin-left:10px;" method="post" action="">
+            <div class="form-group">
+                <input class="form-control" id="PP" name="PP" style="display:none">
+            </div>
+            <center>
+                <button type="submit" class="btn btn-outline-success" value="簽核">簽核</button>
+                <button type="submit" class="btn btn-outline-danger" value="退回">退回</button>
+            </center>
+        </form>
+    </div>
+</body>
+</html>
