@@ -1,10 +1,11 @@
-﻿@model Budget_System.Models.Budget_Items
+@model Budget_System.Models.Budget_Items
 @{
     Layout = null;
     ViewBag.Title = "Items";
     var table = ViewBag.h;
     var Puid = ViewBag.k;
     var Bugda = ViewBag.Bugda;
+    var count = 0;
 }
 
 <!DOCTYPE html>
@@ -21,65 +22,56 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            // Calculate the amount
-            $("tr").keyup(function () {
-                if ($(this).find("td").find("input")[2].value == '' || $(this).find("td").find("input")[3].value == '' ||
-                    $(this).find("td").find("input")[2].value == 0 || $(this).find("td").find("input")[3].value == 0) {
-                    $(this).find("td").eq(5).html(0);
-                }
-                else {
-                    $(this).find("td").eq(5).html($(this).find("td").find("input")[2].value * $(this).find("td").find("input")[3].value);
-                }
-            });
-            
-            $("body").on("click", "#btnAdd", function () {
-                //Reference the Name and Country TextBoxes.
-                var txt1 = $("#txt1");
-                var txt2 = $("#txt2");
-                var txt3 = $("#txt3");
-                var txt4 = $("#txt4");
-                var txt5 = $("#txt5");
-                var txt6 = $("#txt6");
 
-                if (jQuery.trim(txt1.val()) == "") {
-                    alert("序號不可為空!");
-                    $("#txt1").focus();
-                    return false;
-                };
-                if (jQuery.trim(txt2.val()) == "") {
-                    alert("備註不可為空!");
-                    $("#txt2").focus();
-                    return false;
-                };
-                if (jQuery.trim(txt3.val()) == "") {
-                    alert("單價不可為空!");
-                    $("#txt3").focus();
-                    return false;
-                };
-                if (jQuery.trim(txt4.val()) == "") {
-                    alert("數量不可為空!");
-                    $("#txt4").focus();
-                    return false;
-                };
+            $("body").on("click", "#btnAdd", function () {
+                 let count = $('tr').length - 1;
+                count = count;
+
+                // new tr 插入tbody，在建立底下td
+                let trv =
+                    $(document.createElement('tr')).attr(
+                        {
+                            "id": 'tr-' + count
+                        });
+
+                trv.appendTo('#tbTeams');
+
+
+                trv.after().html(
+                    '<td>@Bugda</td>' +
+                    '<td><input type="text" /></td>' +
+                    '<td><input type="text" /></td>' +
+                    '<td><input type="text" class="total" onkeyup="totalChange(\'tr-'+ count +'\')"/></td>' +
+                    '<td><input type="text" class="total" onkeyup="totalChange(\'tr-'+ count +'\')"/></td>' +
+                    '<td></td>' +
+                    '<td><input type="button" class="btn btn-outline-danger" id="btnRem" value="Remove" onclick="Remove(this)" /></td>' +
+                    '<td style="display:none">@Puid</td>' +
+                    '<td style="display:none"></td>' +
+                    '<td style="display:none"><input type="text" value="N" /></td>' );
+                 //@count = @count + 1;
 
                 //Add Name cell.
                 //Clone new Add list
-                var extendObject = $('tfoot').children().clone(true);
-                extendObject.find('input[id="btnAdd"]').attr("type", "button");
-                extendObject.find('input[id="btnAdd"]').attr("class", "btn btn-outline-danger");
-                extendObject.find('input[id="btnAdd"]').attr("onclick", "Remove(this);");
-                extendObject.find('input[id="btnAdd"]').val("Delete");
-                $('tbody').append(extendObject);
-
-                txt1.val("");
-                txt2.val("");
-                txt3.val("");
-                txt4.val("");
-                txt5.val("");
-                txt6.val("N");
+                //var extendObject = $('tbody').children().clone(true);
+                //extendObject.find('input[id="btnAdd"]').attr("type", "button");
+                //extendObject.find('input[id="btnAdd"]').attr("class", "btn btn-outline-danger");
+                //extendObject.find('input[id="btnAdd"]').attr("onclick", "Remove(this);");
+                //extendObject.find('input[id="btnAdd"]').val("Delete");
+                //$('tbody').append(extendObject);
             });
         });
 
+        let totalChange = (id) => {
+            let row = $('#' + id);
+
+            if (row.children('td').children('.total')[0].value == '' || row.children('td').children('.total')[1].value == '' ||
+                row.children('td').children('.total')[0].value == 0 || row.children('td').children('.total')[1].value == 0 ){
+                    row.children('td')[5].innerHTML = 0;
+                }
+                else {
+                    row.children('td')[5].innerHTML = row.children('td').children('.total')[0].value * row.children('td').children('.total')[1].value;
+                }
+        }
 
         function Remove(button) {
             //Determine the reference of the Row using the Button.
@@ -98,7 +90,7 @@
         function RemoveAll() {
             if (confirm("Do you want to delete all ? ")) {
                 $('#tblCustomers > tbody  > tr').each(function () {
-                    $(this).find("td").find("input")[6].value = 'X';
+                    $(this).find("td").find("input")[5].value = 'X';
                     $(this).hide();
                 });
             }
@@ -106,11 +98,42 @@
 
         $(document).ready(function () {
             $("body").on("click", "#btnSave", function () {
+                let i = 0;
                 //Loop through the Table rows and build a JSON array.
                 var customers = new Array();
                 $("#tblCustomers > tbody > tr").each(function () {
                     let row = $(this);
                     let customer = {};
+
+                    if (row.find("td").find("input")[5].value == "N") {
+                        if ($.trim(row.find("td").find("input")[0].value) == "") {
+                            alert("序號不可為空!");
+                            row.find("td").find("input")[0].focus();
+                            i++;
+                            return false;
+                        };
+
+                        if ($.trim(row.find("td").find("input")[1].value) == "") {
+                            alert("備註不可為空!");
+                            row.find("td").find("input")[1].focus();
+                            i++;
+                            return false;
+                        };
+
+                        if ($.trim(row.find("td").find("input")[2].value) == "") {
+                            alert("數量不可為空!");
+                            row.find("td").find("input")[2].focus();
+                            i++;
+                            return false;
+                        };
+
+                        if ($.trim(row.find("td").find("input")[3].value) == "") {
+                            alert("單價不可為空!");
+                            row.find("td").find("input")[3].focus();
+                            i++;
+                            return false;
+                        };
+                    }
 
                     customer.Items = row.find("td").find("input")[0].value;
                     customer.Remark = row.find("td").find("input")[1].value;
@@ -123,6 +146,7 @@
                     customers.push(customer);
                 });
 
+                if (i == 0) {
                 //Send the JSON array to Controller using AJAX.
                 $.ajax({
                     type: "POST",
@@ -136,8 +160,8 @@
                             parent.$.fancybox.close();
                         }
                     }
-
-                });
+                    });
+                }
             });
         });
     </script>
@@ -174,6 +198,10 @@
             height: 100%;
             width: 100%;
         }
+
+        #btnAdd {
+            float: right;
+        }
     </style>
 </head>
 
@@ -185,6 +213,8 @@
             <input type="button" class="btn btn-outline-danger" id="btnRemAll" value="Remove All" onclick="RemoveAll()" />
             <span style="letter-spacing:20px;"></span>
             <input type="button" class="btn btn-outline-success" id="btnSave" value="Save All" />
+            <span style="letter-spacing:20px;"></span>
+            <input type="button" class="btn btn-success" id="btnAdd" value="Add new" />
             <p></p>
         </div>
 
@@ -201,42 +231,43 @@
                         <th scope="col"></th>
                         <th scope="col" style="display:none">Puid</th>
                         <th scope="col" style="display:none">Uid</th>
-                        <th scope="col" style="display:none" ></th>
+                        <th scope="col" style="display:none"></th>
                     </tr>
                 </thead>
                 <tbody id="tbTeams" style="background-color:#e4e4e4">
                     @foreach (var item in table)
                     {
-                        <tr>
+                        <tr id="tr-@count">
                             <td>@Bugda</td>
                             <td><input type="text" value="@item.Items" /></td>
                             <td><input type="text" value="@item.Remark" /></td>
-                            <td><input type="text" value="@item.Amount" align="left" /></td>
-                            <td><input type="text" value="@item.Price" align="left" /></td>
+                            <td><input class="total" onkeyup="totalChange('tr-@count')" type="text" value="@item.Amount" align="left" /></td>
+                            <td><input class="total" onkeyup="totalChange('tr-@count')" type="text" value="@item.Price" align="left" /></td>
                             <td>@item.Total</td>
                             <td>
                                 <input type="button" class="btn btn-outline-danger" id="btnRem" value="Remove" onclick="Remove(this)" />
                             </td>
                             <td style="display:none">@item.Puid</td>
                             <td style="display:none">@item.Uid</td>
-                            <td style="display:none" ><input type="text" value="@item.sctrl" /></td>
+                            <td style="display:none"><input type="text" value="@item.sctrl" /></td>
                         </tr>
+                        count += 1;
                     }
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td>@Bugda</td>
-                        <td><input type="text" id="txt1" /></td>
-                        <td><input type="text" id="txt2" /></td>
-                        <td><input type="text" id="txt3" /></td>
-                        <td><input type="text" id="txt4" /></td>
-                        <td id="txt5"></td>
-                        <td><input type="button" class="btn btn-success" id="btnAdd" value="   Add   " /></td>
-                        <td style="display:none">@Puid</td>
-                        <td style="display:none"></td>
-                        <td style="display:none" ><input type="text" id="txt6" value="N" /></td>
-                    </tr>
-                </tfoot>
+                @*<tfoot>
+                        <tr id="tf">
+                            <td>@Bugda</td>
+                            <td><input type="text" id="txt1" /></td>
+                            <td><input type="text" id="txt2" /></td>
+                            <td><input type="text" id="txt3" /></td>
+                            <td><input type="text" id="txt4" /></td>
+                            <td id="txt5"></td>
+                            <td><input type="button" class="btn btn-success" id="btnAdd" value="   Add   " /></td>
+                            <td style="display:none">@Puid</td>
+                            <td style="display:none"></td>
+                            <td style="display:none" ><input type="text" id="txt6" value="N" /></td>
+                        </tr>
+                    </tfoot>*@
             </table>
         </div>
     </div>
