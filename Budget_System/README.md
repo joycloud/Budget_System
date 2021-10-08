@@ -8,3 +8,10 @@
 ![image](https://github.com/joycloud/Budget_System/blob/master/Budget_System/pics/01.PNG)
 
 ---
+
+## 資料表架構
+  * 各個表單的主檔table對應至指定的流程，當此表單確認後開始跑流程，便會以表單代號為主要key產生至流程的table，而流程table為目前表單的關卡位置，此外每次動作也會記錄在歷史的table內並顯示在畫面方便相關使用者查看。
+
+![image](https://github.com/joycloud/Budget_System/blob/master/Budget_System/pics/02.PNG)
+
+---
