@@ -15,3 +15,17 @@
 ![image](https://github.com/joycloud/Budget_System/blob/master/Budget_System/pics/02.PNG)
 
 ---
+
+## 登入畫面
+  * 使用者登入。
+
+![image](https://github.com/joycloud/Budget_System/blob/master/Budget_System/pics/03.PNG)
+
+---
+
+## 新增預算
+  * 輸入部門代號、月份，系統會判斷當月是否有重複申請。
+
+![image](https://github.com/joycloud/Budget_System/blob/master/Budget_System/pics/04.PNG)
+
+---
