@@ -1,3 +1,10 @@
-Album View
-Display the album list in the database.
-When the mouse is moved into the photo, the photo will automatically zoom in.
+# 預算系統 (ASP.NET MVC)
+
+---
+
+## 基本操作流程
+  * 使用者登入後畫面顯示申請過的預算資料，隨後在自行操作新增或修改預算，預算細分至各部門科目(例如:業務部有交際費、資訊部有設備維修費等)，之後再針對科目紀錄細項明細(例如:交際費明細，高鐵費、客戶外食費等)，簽核功能依照設定的關卡人員進行簽核。
+
+![image](https://github.com/joycloud/Budget_System/Budget_System/pics/01.PNG)
+
+---
